@@ -1,4 +1,3 @@
-
 const express = require('express')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
@@ -55,6 +54,7 @@ async function run() {
             const email = req.params.email;
             const user = await userCollection.findOne({ email: email });
             const isAdmin = user.role === 'admin';
+            res.send({ admin: isAdmin })
         })
 
         app.put('/user/:admin/:email', verifyJWT, async (req, res) => {
